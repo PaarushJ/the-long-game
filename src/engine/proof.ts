@@ -71,6 +71,35 @@ export function proofStats(windows: ProofWindow[]): ProofStats {
   }
 }
 
+// For the "I don't have time" projector: per start month, the growth multiple
+// on a lump sum and the future value of $1 contributed monthly. Final value for
+// any (lump, monthly) pair is then lump*lumpMult + monthly*annuity — so the
+// sliders stay instant.
+export interface QuickWindow {
+  lumpMult: number
+  annuity: number
+}
+
+const quickCache = new Map<number, QuickWindow[]>()
+
+export function quickWindows(months: number): QuickWindow[] {
+  const hit = quickCache.get(months)
+  if (hit) return hit
+  const m = getMarket()
+  const out: QuickWindow[] = []
+  for (let s = 0; s + months <= TOTAL_MONTHS; s++) {
+    let lump = 1
+    let ann = 0
+    for (let t = s; t < s + months; t++) {
+      lump *= 1 + m.stocks[t]
+      ann = ann * (1 + m.stocks[t]) + 1
+    }
+    out.push({ lumpMult: lump, annuity: ann })
+  }
+  quickCache.set(months, out)
+  return out
+}
+
 export interface WindowSeries {
   stock: number[]
   cash: number[]

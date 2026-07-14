@@ -122,7 +122,13 @@ const SLIDES = [
   },
 ]
 
-export function Chapter1({ onDone }: { onDone: () => void }) {
+export function Chapter1({
+  onDone,
+  doneLabel = 'Enter the simulator',
+}: {
+  onDone: () => void
+  doneLabel?: string
+}) {
   const [i, setI] = useState(0)
   const slide = SLIDES[i]
   const last = i === SLIDES.length - 1
@@ -137,7 +143,7 @@ export function Chapter1({ onDone }: { onDone: () => void }) {
           <button className="btn btn-ghost" onClick={() => setI(i - 1)}>Back</button>
         )}
         <button className="btn btn-primary" onClick={() => (last ? onDone() : setI(i + 1))}>
-          {last ? 'Enter the simulator' : 'Next'}
+          {last ? doneLabel : 'Next'}
         </button>
       </div>
     </div>
