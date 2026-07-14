@@ -45,7 +45,15 @@ function verdictCopy(r: RunResult): string {
   )} compared to never touching it — tuition, paid to the market. Most people never learn this lesson with fake money. You just did.`
 }
 
-export function DebriefScreen({ result, onReplay }: { result: RunResult; onReplay: () => void }) {
+export function DebriefScreen({
+  result,
+  onReplay,
+  onProof,
+}: {
+  result: RunResult
+  onReplay: () => void
+  onProof: () => void
+}) {
   const final = result.playerValues[result.playerValues.length - 1]
   const panicFinal = result.ghosts.panic[result.ghosts.panic.length - 1]
   const cashFinal = result.ghosts.cashOnly[result.ghosts.cashOnly.length - 1]
@@ -168,6 +176,17 @@ export function DebriefScreen({ result, onReplay }: { result: RunResult; onRepla
         <div className="btn-row">
           <button className="btn" onClick={() => downloadShareCard(result)}>Download your run card</button>
           <button className="btn btn-primary" onClick={onReplay}>Run it again — choose differently</button>
+        </div>
+      </section>
+
+      <section className="d-section">
+        <h2>Still second-guessing?</h2>
+        <p style={{ color: 'var(--ink-soft)', maxWidth: '38em' }}>
+          One run is a story. Here is the census: every possible start date since 1995,
+          tested against cash — the losing ones included.
+        </p>
+        <div className="btn-row">
+          <button className="btn" onClick={onProof}>Open The Proof</button>
         </div>
       </section>
 

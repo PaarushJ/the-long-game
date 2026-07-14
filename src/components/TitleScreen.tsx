@@ -1,9 +1,10 @@
 interface Props {
   onChapter: () => void
   onSkip: () => void
+  onProof: () => void
 }
 
-export function TitleScreen({ onChapter, onSkip }: Props) {
+export function TitleScreen({ onChapter, onSkip, onProof }: Props) {
   return (
     <div className="title-screen">
       <p className="eyebrow">A flight simulator for investing</p>
@@ -22,6 +23,9 @@ export function TitleScreen({ onChapter, onSkip }: Props) {
           Skip straight to the simulator
         </button>
       </div>
+      <button className="proof-link" onClick={onProof}>
+        Skeptical? Good. → See every start date since 1995, tested. No cherry-picking.
+      </button>
     </div>
   )
 }
