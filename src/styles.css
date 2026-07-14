@@ -405,6 +405,14 @@ details.data-table summary:focus-visible { outline: 2px solid var(--gold-ui); ou
   letter-spacing: 0.03em;
 }
 
+.principle {
+  border-left: 3px solid var(--gold-ui);
+  background: var(--surface);
+  padding: 18px 22px;
+  font-size: 17px;
+}
+.principle p { margin: 0; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
